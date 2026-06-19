@@ -11,6 +11,14 @@ This repository contains:
 - bilingual production guides
 - a complete Lanxi example pet package
 
+## Showcase
+
+See the Lanxi demo page:
+
+[`docs/index.html`](docs/index.html)
+
+![Lanxi animated pet states](docs/assets/lanxi-state-overview.png)
+
 ## Quick Start
 
 The Python scripts require Pillow:

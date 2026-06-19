@@ -11,6 +11,14 @@
 - 中英文制作指南
 - 一个完整的 Lanxi 示例宠物包
 
+## 效果展示
+
+查看 Lanxi 中文展示页面：
+
+[`docs/index.zh-CN.html`](docs/index.zh-CN.html)
+
+![Lanxi 动画状态展示](docs/assets/lanxi-state-overview.png)
+
 ## 快速开始
 
 Python 脚本依赖 Pillow：

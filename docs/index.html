@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OC Codex Pet Maker Skill</title>
+    <meta
+      name="description"
+      content="A reusable workflow and Codex Skill for turning an OC or avatar concept into a polished Codex desktop pet."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #111827;
+        --muted: #68758a;
+        --line: rgba(23, 31, 48, 0.14);
+        --paper: #fbfcff;
+        --blue: #91d8f4;
+        --pink: #f6aecf;
+        --violet: #b9a7ff;
+        --gold: #d7a84b;
+        --black: #151923;
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          linear-gradient(90deg, rgba(17, 24, 39, 0.035) 1px, transparent 1px),
+          linear-gradient(rgba(17, 24, 39, 0.035) 1px, transparent 1px),
+          #f7f9fd;
+        background-size: 28px 28px;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .site-shell {
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px clamp(20px, 5vw, 72px);
+        color: #172033;
+        backdrop-filter: blur(18px);
+        background: rgba(251, 252, 255, 0.72);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.72);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border: 2px solid var(--black);
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--blue), #fff 48%, var(--pink));
+        box-shadow: 4px 4px 0 var(--black);
+        font-size: 14px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #39465c;
+      }
+
+      .nav a {
+        text-decoration: none;
+        padding: 9px 12px;
+        border-radius: 999px;
+      }
+
+      .nav a:hover {
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        min-height: 84vh;
+        display: grid;
+        align-items: end;
+        padding: 130px clamp(20px, 6vw, 86px) 56px;
+        background:
+          radial-gradient(circle at 84% 42%, rgba(185, 167, 255, 0.24), transparent 34%),
+          linear-gradient(90deg, rgba(248, 251, 255, 0.98), rgba(248, 251, 255, 0.84) 48%, rgba(248, 251, 255, 0.68)),
+          #f7f9fd;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        right: clamp(18px, 4vw, 86px);
+        bottom: clamp(28px, 7vh, 78px);
+        z-index: -1;
+        width: min(980px, 58vw);
+        aspect-ratio: 16 / 9;
+        background: url("assets/lanxi-hero-bg.jpg") center / contain no-repeat;
+        opacity: 0.82;
+        filter: saturate(1.02);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        width: min(850px, 100%);
+      }
+
+      .eyebrow {
+        margin: 0 0 22px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: #273248;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 42px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--blue), var(--pink), var(--gold));
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 780px;
+        font-size: clamp(48px, 8vw, 102px);
+        line-height: 0.92;
+        letter-spacing: 0;
+      }
+
+      .hero-copy {
+        max-width: 690px;
+        margin: 26px 0 0;
+        font-size: 19px;
+        line-height: 1.7;
+        color: #354157;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border: 1px solid var(--black);
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 800;
+        background: #fff;
+        box-shadow: 4px 4px 0 var(--black);
+      }
+
+      .button.primary {
+        background: var(--black);
+        color: #fff;
+        box-shadow: 4px 4px 0 var(--gold);
+      }
+
+      .section {
+        padding: 82px clamp(20px, 6vw, 86px);
+      }
+
+      .section.alt {
+        background: #111827;
+        color: #f8fbff;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 32px;
+        margin-bottom: 34px;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: clamp(32px, 5vw, 58px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .section-note {
+        max-width: 560px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .alt .section-note {
+        color: #b8c3d7;
+      }
+
+      .pet-stage {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(10, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .gif-card,
+      .image-card,
+      .step-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.78);
+        overflow: hidden;
+        box-shadow: 0 24px 80px rgba(30, 41, 59, 0.08);
+      }
+
+      .gif-card {
+        display: flex;
+        flex-direction: column;
+        grid-column: span 2;
+        min-height: 100%;
+      }
+
+      .gif-card:nth-child(6) {
+        grid-column: 2 / span 2;
+      }
+
+      .gif-card img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 192 / 208;
+        object-fit: cover;
+      }
+
+      .gif-card span {
+        padding: 12px 14px 14px;
+        font-weight: 800;
+        color: #222b3b;
+      }
+
+      .image-card {
+        padding: 14px;
+      }
+
+      .image-card img {
+        display: block;
+        width: 100%;
+        border-radius: 6px;
+      }
+
+      .caption {
+        margin: 12px 2px 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .pipeline {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .step-card {
+        padding: 22px;
+        min-height: 220px;
+      }
+
+      .step-kicker {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        margin-bottom: 22px;
+        color: #111827;
+        background: linear-gradient(135deg, var(--blue), var(--pink));
+        font-weight: 900;
+      }
+
+      .step-card h3 {
+        margin: 0 0 12px;
+        font-size: 20px;
+      }
+
+      .step-card p {
+        margin: 0;
+        color: #566276;
+        line-height: 1.65;
+      }
+
+      .states-layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+        gap: 26px;
+        align-items: center;
+      }
+
+      .state-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .state-pill {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 12px;
+        align-items: center;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .state-pill strong {
+        color: #fff;
+      }
+
+      .state-pill span {
+        color: #b8c3d7;
+        font-size: 14px;
+      }
+
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      }
+
+      .final-cta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 28px;
+        align-items: center;
+        padding: 42px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background:
+          linear-gradient(135deg, rgba(145, 216, 244, 0.18), rgba(246, 174, 207, 0.18)),
+          #fff;
+      }
+
+      .final-cta h2 {
+        margin: 0 0 12px;
+        font-size: clamp(30px, 4vw, 46px);
+      }
+
+      .final-cta p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      @media (max-width: 1000px) {
+        .showcase-grid,
+        .pipeline {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .gif-card,
+        .gif-card:nth-child(6) {
+          grid-column: auto;
+        }
+
+        .pet-stage,
+        .states-layout,
+        .final-cta {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .topbar {
+          position: static;
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 20px;
+        }
+
+        .nav {
+          flex-wrap: wrap;
+        }
+
+        .hero {
+          min-height: 78vh;
+          padding: 70px 20px 42px;
+        }
+
+        .hero::after {
+          right: -180px;
+          bottom: 28px;
+          width: 720px;
+          opacity: 0.46;
+        }
+
+        .hero-copy {
+          font-size: 16px;
+        }
+
+        .section {
+          padding: 56px 20px;
+        }
+
+        .section-header {
+          display: block;
+        }
+
+        .section-note {
+          margin-top: 16px;
+        }
+
+        .showcase-grid,
+        .pipeline {
+          grid-template-columns: 1fr;
+        }
+
+        .final-cta {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="site-shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <div class="brand">
+          <div class="brand-mark">OC</div>
+          <span>OC Codex Pet Maker</span>
+        </div>
+        <div class="nav">
+          <a href="#showcase">Showcase</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#states">States</a>
+          <a href="https://github.com/otrttf/oc-codex-pet-maker#readme">README</a>
+          <a href="index.zh-CN.html">中文</a>
+        </div>
+      </nav>
+
+      <header class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Codex Skill + Sprite Toolkit</p>
+          <h1>Turn your OC into a polished Codex pet.</h1>
+          <p class="hero-copy">
+            A repeatable workflow for character planning, state design, sprite strip cleanup,
+            deterministic cutting, and final Codex pet packaging. Lanxi is the reference case.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/otrttf/oc-codex-pet-maker#readme">Start with README</a>
+            <a class="button" href="index.zh-CN.html">中文说明</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="section" id="showcase">
+        <div class="section-header">
+          <h2 class="section-title">Lanxi, finished as a desktop pet.</h2>
+          <p class="section-note">
+            The final result is not a single illustration. It is a 9-state animated sprite
+            package that Codex can play in different desktop states.
+          </p>
+        </div>
+
+        <div class="showcase-grid" aria-label="Animated Lanxi state previews">
+          <figure class="gif-card">
+            <img src="assets/lanxi-idle.gif" alt="Lanxi idle animation preview" />
+            <span>Idle</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-running-right.gif" alt="Lanxi running right animation preview" />
+            <span>Run Right</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-running-left.gif" alt="Lanxi running left animation preview" />
+            <span>Run Left</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-waving.gif" alt="Lanxi waving animation preview" />
+            <span>Waving</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-jumping.gif" alt="Lanxi jumping animation preview" />
+            <span>Jumping</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-failed.gif" alt="Lanxi failed state animation preview" />
+            <span>Failed</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-waiting.gif" alt="Lanxi waiting animation preview" />
+            <span>Waiting</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-running.gif" alt="Lanxi working animation preview" />
+            <span>Working</span>
+          </figure>
+          <figure class="gif-card">
+            <img src="assets/lanxi-review.gif" alt="Lanxi review animation preview" />
+            <span>Review</span>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="pet-stage">
+          <figure class="image-card">
+            <img src="assets/lanxi-state-overview.png" alt="Lanxi state overview grid" />
+            <figcaption class="caption">
+              A compact overview of the 9 state rows used by the final Codex pet.
+            </figcaption>
+          </figure>
+          <figure class="image-card">
+            <img src="assets/lanxi-spritesheet-preview.jpg" alt="Lanxi final spritesheet preview" />
+            <figcaption class="caption">
+              The final atlas packs 8 frames across by 9 states down, with each cell sized
+              at 192 x 208 pixels.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section alt" id="states">
+        <div class="states-layout">
+          <div>
+            <h2 class="section-title">Make the hidden state contract visible first.</h2>
+            <p class="section-note">
+              The Skill starts by explaining the states, then asks the user whether each action
+              should use the default behavior or a custom OC-specific behavior.
+            </p>
+          </div>
+          <div class="state-list" aria-label="Codex pet states">
+            <div class="state-pill"><strong class="mono">0</strong><span><b>idle</b> default calm state</span></div>
+            <div class="state-pill"><strong class="mono">1</strong><span><b>running-right</b> dragged or moving right</span></div>
+            <div class="state-pill"><strong class="mono">2</strong><span><b>running-left</b> dragged or moving left</span></div>
+            <div class="state-pill"><strong class="mono">3</strong><span><b>waving</b> greeting</span></div>
+            <div class="state-pill"><strong class="mono">4</strong><span><b>jumping</b> upbeat jump</span></div>
+            <div class="state-pill"><strong class="mono">5</strong><span><b>failed</b> task failed or recoverable error</span></div>
+            <div class="state-pill"><strong class="mono">6</strong><span><b>waiting</b> waiting for user input</span></div>
+            <div class="state-pill"><strong class="mono">7</strong><span><b>running</b> task is processing</span></div>
+            <div class="state-pill"><strong class="mono">8</strong><span><b>review</b> checking the result</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workflow">
+        <div class="section-header">
+          <h2 class="section-title">A compact workflow that avoids the usual traps.</h2>
+          <p class="section-note">
+            The details live in the README and guides. This page shows the high-level path from
+            character idea to a verified pet package.
+          </p>
+        </div>
+        <div class="pipeline">
+          <article class="step-card">
+            <div class="step-kicker">1</div>
+            <h3>Plan the states</h3>
+            <p>Explain the 9-state contract and confirm custom actions before image generation.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-kicker">2</div>
+            <h3>Lock the character</h3>
+            <p>Create a simplified chibi reference with fixed identity details and forbidden changes.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-kicker">3</div>
+            <h3>Cut with code</h3>
+            <p>Use smart component detection so hair, props, and wide poses do not leak into neighboring frames.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-kicker">4</div>
+            <h3>Package and validate</h3>
+            <p>Compose the 1536 x 1872 atlas, create pet.json, and validate the final package.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="final-cta">
+          <div>
+            <h2>Use Lanxi as the reference, then make your own.</h2>
+            <p>
+              The repository includes the Skill entrypoint, scripts, templates, bilingual guides,
+              spacing rules, and a complete Lanxi example package.
+            </p>
+          </div>
+          <a class="button primary" href="https://github.com/otrttf/oc-codex-pet-maker#readme">Open the project</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
