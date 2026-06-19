@@ -1,5 +1,7 @@
 # OC Codex Pet Maker Skill
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 Create a custom Codex desktop pet from your own OC/avatar concept, with a repeatable workflow for state planning, sprite generation, cleanup, QA, and packaging.
 
 This repository contains:
@@ -8,8 +10,6 @@ This repository contains:
 - reusable Python tools for cutting and packaging sprites
 - bilingual production guides
 - a complete Lanxi example pet package
-
-中文制作指南：[docs/CODEX_PET_CREATION_GUIDE.zh-CN.md](docs/CODEX_PET_CREATION_GUIDE.zh-CN.md)
 
 ## Quick Start
 
@@ -114,6 +114,7 @@ One of the biggest lessons from Lanxi was that generated horizontal strips often
 - English guide: [`docs/CODEX_PET_CREATION_GUIDE.md`](docs/CODEX_PET_CREATION_GUIDE.md)
 - 中文指南：[`docs/CODEX_PET_CREATION_GUIDE.zh-CN.md`](docs/CODEX_PET_CREATION_GUIDE.zh-CN.md)
 - Sprite strip spacing rules: [`docs/SPRITE_STRIP_SPACING_RULES.md`](docs/SPRITE_STRIP_SPACING_RULES.md)
+- GitHub publishing notes: [`docs/GITHUB_PUBLISHING_NOTES.zh-CN.md`](docs/GITHUB_PUBLISHING_NOTES.zh-CN.md)
 - Roadmap: [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
 ## Repository Structure
@@ -131,6 +132,7 @@ oc-codex-pet-maker/
   docs/
     CODEX_PET_CREATION_GUIDE.md
     CODEX_PET_CREATION_GUIDE.zh-CN.md
+    GITHUB_PUBLISHING_NOTES.zh-CN.md
     SPRITE_STRIP_SPACING_RULES.md
     ROADMAP.md
   examples/
