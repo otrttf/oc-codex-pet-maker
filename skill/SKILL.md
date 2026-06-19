@@ -1,9 +1,9 @@
 ---
-name: codex-pet-maker
+name: oc-codex-pet-maker
 description: Use this skill to help a user create a custom Codex desktop pet from an OC/avatar concept, including state action planning, sprite-strip generation guidance, deterministic cutting, spacing QA, spritesheet packaging, and local installation.
 ---
 
-# Codex Pet Maker
+# OC Codex Pet Maker
 
 Use this skill when the user wants to create, repair, QA, or package a custom Codex desktop pet.
 

@@ -1,122 +1,64 @@
-# Lanxi Codex Pet
+# OC Codex Pet Maker Skill
 
-Lanxi is a work-in-progress custom Codex desktop pet. The goal is to create a polished chibi anime avatar with stable Codex pet animations, clean transparent sprites, and a repeatable production workflow.
+Create a custom Codex desktop pet from your own OC/avatar concept, with a repeatable workflow for state planning, sprite generation, cleanup, QA, and packaging.
+
+This repository contains:
+
+- a Codex Skill entrypoint: [`skill/SKILL.md`](skill/SKILL.md)
+- reusable Python tools for cutting and packaging sprites
+- bilingual production guides
+- a complete Lanxi example pet package
 
 中文制作指南：[docs/CODEX_PET_CREATION_GUIDE.zh-CN.md](docs/CODEX_PET_CREATION_GUIDE.zh-CN.md)
 
-This project is not fully finished yet. The current focus is validating the character design, state references, sprite row generation, chroma-key cleanup, and `192x208` frame safety before assembling the final Codex `spritesheet.webp`.
+## Quick Start
 
-## Current Direction
+The Python scripts require Pillow:
 
-Lanxi is a cute but cool Q-version virtual avatar:
-
-- light aqua-blue long hair
-- silver-gray eyes
-- silver `J` hair clip
-- silver `H` earring
-- white school-uniform outfit
-- white, black, and pale-pink sporty street-dance jacket
-- white pleated skirt
-- silver waist chain with a small `X` charm
-- white over-the-knee socks
-- black academy-style shoes
-- white safety shorts / bloomers under the skirt for running and jumping states
-
-The canonical character rules live in:
-
-[10-references/lanxi-q-reference/LANXI_CHARACTER_SPEC.md](10-references/lanxi-q-reference/LANXI_CHARACTER_SPEC.md)
-
-## Project Structure
-
-```text
-Lanxi/
-  README.md
-  docs/
-    CODEX_PET_CREATION_GUIDE.md
-    SPRITE_STRIP_SPACING_RULES.md
-  templates/
-    state-action-plan.template.md
-  skill/
-    SKILL.md
-  scripts/
-    cut_strip_to_cells.py
-    compose_spritesheet.py
-    validate_pet_package.py
-  examples/
-    lanxi/
-  10-references/
-    lanxi-q-reference/
-    lanxi-approved/
-  20-states/
-    lanxi-q-states/
-  30-sprite-tests/
-    lanxi-q-sprite-tests/
-  80-legacy/
-  90-debug/
+```bash
+python3 -m pip install Pillow
 ```
 
-## Important Folders
+### 1. Install The Skill
 
-- `10-references/lanxi-q-reference/`
-  - Current Q-version canonical reference and character spec.
-- `20-states/lanxi-q-states/`
-  - Current state reference images, including idle, waiting, running, failed, review, waving, jumping, running-left, and running-right.
-- `30-sprite-tests/lanxi-q-sprite-tests/`
-  - Sprite row experiments and cleanup scripts.
-  - Includes `cut_strip_to_cells.py`, a reusable helper for cutting chroma-key sprite strips into `192x208` transparent cells.
-- `templates/`
-  - Reusable planning templates for future Codex pet projects.
-- `skill/`
-  - Draft Codex skill entrypoint that tells Codex how to use this workflow.
-- `scripts/`
-  - Reusable Python tools for cutting strips, composing spritesheets, and validating pet packages.
-- `examples/`
-  - Example manifests and project inputs. `examples/lanxi/rows-manifest.json` points to the current Lanxi row candidates.
-- `80-legacy/`
-  - Older pet packages and earlier run artifacts.
-- `90-debug/`
-  - Debug crops and inspection outputs from previous hair-clipping and WebP issues.
+Copy the skill folder into your Codex skills directory:
 
-## Current Best Running-Right Candidate
+```bash
+mkdir -p ~/.codex/skills/oc-codex-pet-maker
+cp -R skill/* ~/.codex/skills/oc-codex-pet-maker/
+```
 
-The current preferred right-running row is:
+Then start a new Codex conversation and say something like:
 
-- Source strip: `30-sprite-tests/lanxi-q-sprite-tests/running-right-8frame-strip-v3-first-style-legfix-shorts.png`
-- Clean `192x208` strip: `30-sprite-tests/lanxi-q-sprite-tests/running-right-8frame-192x208-transparent-v3-first-style-legfix-shorts-component-clean.png`
-- Preview GIF: `30-sprite-tests/lanxi-q-sprite-tests/running-right-8frame-preview-v3-first-style-legfix-shorts-component-clean.gif`
+```text
+Use the OC Codex Pet Maker skill to help me create a Codex pet for my OC.
+```
 
-This candidate keeps the more expressive first-style look while fixing leg artifacts, adding safety shorts, removing stray neighboring-frame fragments, and reducing magenta edge contamination.
+The Skill should first explain the 9 Codex pet states and help you create a state action plan before generating images.
 
-## Workflow Summary
+### 2. Create A State Action Plan
 
-The repeatable workflow is documented here:
+Codex pets use 9 animation states:
 
-- English: [docs/CODEX_PET_CREATION_GUIDE.md](docs/CODEX_PET_CREATION_GUIDE.md)
-- 中文：[docs/CODEX_PET_CREATION_GUIDE.zh-CN.md](docs/CODEX_PET_CREATION_GUIDE.zh-CN.md)
+| Row | State | Meaning |
+| --- | --- | --- |
+| 0 | `idle` | default calm state |
+| 1 | `running-right` | dragged/moving right |
+| 2 | `running-left` | dragged/moving left |
+| 3 | `waving` | greeting |
+| 4 | `jumping` | upbeat jump |
+| 5 | `failed` | task failed or recoverable error |
+| 6 | `waiting` | waiting for user input or approval |
+| 7 | `running` | task is processing, not literal foot-running |
+| 8 | `review` | reviewing/checking result |
 
-Sprite strip spacing rules live here:
+Use the planning template:
 
-[docs/SPRITE_STRIP_SPACING_RULES.md](docs/SPRITE_STRIP_SPACING_RULES.md)
+[`templates/state-action-plan.template.md`](templates/state-action-plan.template.md)
 
-State action planning template:
+### 3. Generate And Cut Sprite Rows
 
-[templates/state-action-plan.template.md](templates/state-action-plan.template.md)
-
-At a high level:
-
-1. Explain the Codex pet state contract to the user.
-2. Fill and approve a state action plan.
-3. Design and approve one canonical character reference.
-4. Simplify the character for `192x208` readability.
-5. Generate state references first, then sprite strips.
-6. Use chroma-key backgrounds and wide frame spacing.
-7. Cut generated strips into transparent `192x208` cells.
-8. Remove neighboring-frame fragments and magenta edge residue.
-9. Build and QA the final `spritesheet.webp`.
-
-## Reusable Scripts
-
-Cut a generated horizontal strip into transparent `192x208` cells:
+After each horizontal sprite strip is generated, cut it into transparent `192x208` cells:
 
 ```bash
 python3 scripts/cut_strip_to_cells.py \
@@ -129,7 +71,17 @@ python3 scripts/cut_strip_to_cells.py \
   --component-padding 22
 ```
 
-Compose approved row strips into a Codex spritesheet:
+Review the generated:
+
+```text
+<prefix>-cell-preview.png
+<prefix>-preview.gif
+<prefix>-metrics.json
+```
+
+### 4. Compose A Spritesheet
+
+Create a manifest for the 9 approved rows, then compose the final atlas:
 
 ```bash
 python3 scripts/compose_spritesheet.py \
@@ -138,34 +90,77 @@ python3 scripts/compose_spritesheet.py \
   --webp-out 40-draft-package/spritesheet.webp
 ```
 
-Validate a pet package:
+Validate the package:
 
 ```bash
 python3 scripts/validate_pet_package.py --package-dir 40-draft-package
 ```
 
-The draft Skill entrypoint is:
+## Why This Exists
 
-[skill/SKILL.md](skill/SKILL.md)
+Making a polished Codex pet is more fragile than making a nice illustration. The final pet needs to survive:
 
-## Current Status
+- small `192x208` cells
+- 9 distinct app states
+- transparent background cleanup
+- long hair and wide motion
+- row-by-row animation consistency
+- `spritesheet.webp` packaging
 
-- Canonical Q-version character: done.
-- State reference images: mostly done.
-- Running-right 8-frame row: candidate available.
-- Running-left 8-frame row: generated and awaiting final visual review.
-- Full Codex spritesheet: not yet finalized.
-- Final package: not yet ready.
+One of the biggest lessons from Lanxi was that generated horizontal strips often place frames too close together. This project includes spacing rules and a `smart-components` cutter that detects real character boundaries, warns about tight gutters, and avoids cutting neighboring hair or props into the wrong frame.
 
-## Notes For GitHub
+## Guides
 
-Generated image assets may be large. Before publishing, decide whether to keep all experiments or only keep:
+- English guide: [`docs/CODEX_PET_CREATION_GUIDE.md`](docs/CODEX_PET_CREATION_GUIDE.md)
+- 中文指南：[`docs/CODEX_PET_CREATION_GUIDE.zh-CN.md`](docs/CODEX_PET_CREATION_GUIDE.zh-CN.md)
+- Sprite strip spacing rules: [`docs/SPRITE_STRIP_SPACING_RULES.md`](docs/SPRITE_STRIP_SPACING_RULES.md)
+- Roadmap: [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
-- canonical references
-- final state references
-- final sprite rows
-- cleanup scripts
-- final package
-- selected QA previews
+## Repository Structure
 
-Older experiments can be moved to releases, Git LFS, or left out of the repository if size becomes a problem.
+```text
+oc-codex-pet-maker/
+  skill/
+    SKILL.md
+  scripts/
+    cut_strip_to_cells.py
+    compose_spritesheet.py
+    validate_pet_package.py
+  templates/
+    state-action-plan.template.md
+  docs/
+    CODEX_PET_CREATION_GUIDE.md
+    CODEX_PET_CREATION_GUIDE.zh-CN.md
+    SPRITE_STRIP_SPACING_RULES.md
+    ROADMAP.md
+  examples/
+    lanxi/
+      rows-manifest.json
+      rows/
+  10-references/
+  20-states/
+  40-draft-package/
+```
+
+## Lanxi Example
+
+Lanxi is the example pet used to develop this workflow. She is a cute-cool chibi virtual avatar with long aqua hair, school-uniform street-dance styling, and a small laptop/standing-desk workflow for `waiting` and `running` states.
+
+The example includes:
+
+- canonical character references in [`10-references/`](10-references/)
+- state references in [`20-states/`](20-states/)
+- approved row strips in [`examples/lanxi/rows/`](examples/lanxi/rows/)
+- a ready draft package in [`40-draft-package/`](40-draft-package/)
+
+You can validate the Lanxi package with:
+
+```bash
+python3 scripts/validate_pet_package.py --package-dir 40-draft-package
+```
+
+## Current Limitations
+
+- Slight magenta edge contamination can still appear after chroma removal. It is much better than the early versions, but further edge cleanup is a future improvement.
+- The current Skill is a draft entrypoint. It documents the workflow and calls the local scripts, but it is not yet packaged as a one-command installer.
+- Generated assets can make the repository large. Legacy experiments and debug files are intentionally ignored.
