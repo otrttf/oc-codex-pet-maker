@@ -1,0 +1,317 @@
+[
+  {
+    "state": "idle",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/idle-reference.png",
+    "source_size": [
+      1206,
+      1305
+    ],
+    "bbox": [
+      262,
+      127,
+      965,
+      1160
+    ],
+    "bbox_size": [
+      703,
+      1033
+    ],
+    "fit_size": [
+      122,
+      180
+    ],
+    "scale": 0.17424975798644723,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      35,
+      14
+    ]
+  },
+  {
+    "state": "running-right",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/running-right-reference.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "bbox": [
+      276,
+      116,
+      896,
+      1091
+    ],
+    "bbox_size": [
+      620,
+      975
+    ],
+    "fit_size": [
+      114,
+      180
+    ],
+    "scale": 0.18461538461538463,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      39,
+      14
+    ]
+  },
+  {
+    "state": "running-left",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/running-left-reference.png",
+    "source_size": [
+      1254,
+      1254
+    ],
+    "bbox": [
+      346,
+      99,
+      1028,
+      1098
+    ],
+    "bbox_size": [
+      682,
+      999
+    ],
+    "fit_size": [
+      123,
+      180
+    ],
+    "scale": 0.18018018018018017,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      34,
+      14
+    ]
+  },
+  {
+    "state": "waving",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/waving-reference.png",
+    "source_size": [
+      1208,
+      1302
+    ],
+    "bbox": [
+      300,
+      83,
+      982,
+      1171
+    ],
+    "bbox_size": [
+      682,
+      1088
+    ],
+    "fit_size": [
+      113,
+      180
+    ],
+    "scale": 0.16544117647058823,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      39,
+      14
+    ]
+  },
+  {
+    "state": "jumping",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/jumping-reference.png",
+    "source_size": [
+      1208,
+      1302
+    ],
+    "bbox": [
+      232,
+      82,
+      994,
+      1132
+    ],
+    "bbox_size": [
+      762,
+      1050
+    ],
+    "fit_size": [
+      131,
+      180
+    ],
+    "scale": 0.17142857142857143,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      30,
+      14
+    ]
+  },
+  {
+    "state": "failed",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/failed-reference.png",
+    "source_size": [
+      1207,
+      1303
+    ],
+    "bbox": [
+      296,
+      85,
+      990,
+      1163
+    ],
+    "bbox_size": [
+      694,
+      1078
+    ],
+    "fit_size": [
+      116,
+      180
+    ],
+    "scale": 0.16697588126159554,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      38,
+      14
+    ]
+  },
+  {
+    "state": "waiting",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/waiting-high-desk-reference.png",
+    "source_size": [
+      1209,
+      1301
+    ],
+    "bbox": [
+      137,
+      116,
+      1022,
+      1171
+    ],
+    "bbox_size": [
+      885,
+      1055
+    ],
+    "fit_size": [
+      151,
+      180
+    ],
+    "scale": 0.17061611374407584,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      20,
+      14
+    ]
+  },
+  {
+    "state": "running",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/running-standing-desk-high-reference.png",
+    "source_size": [
+      1207,
+      1303
+    ],
+    "bbox": [
+      240,
+      85,
+      969,
+      1180
+    ],
+    "bbox_size": [
+      729,
+      1095
+    ],
+    "fit_size": [
+      120,
+      180
+    ],
+    "scale": 0.1643835616438356,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      36,
+      14
+    ]
+  },
+  {
+    "state": "review",
+    "source": "/Users/hejiaxuan/Desktop/codexproject/lanxi-q-states/review-reference.png",
+    "source_size": [
+      1207,
+      1303
+    ],
+    "bbox": [
+      303,
+      83,
+      993,
+      1168
+    ],
+    "bbox_size": [
+      690,
+      1085
+    ],
+    "fit_size": [
+      114,
+      180
+    ],
+    "scale": 0.16589861751152074,
+    "cell": [
+      192,
+      208
+    ],
+    "safe_pad": [
+      18,
+      14
+    ],
+    "placed_xy": [
+      39,
+      14
+    ]
+  }
+]
