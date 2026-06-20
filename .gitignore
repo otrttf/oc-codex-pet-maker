@@ -27,3 +27,8 @@ env/
 30-sprite-tests/
 80-legacy/
 90-debug/
+
+# Local draft preview artifacts
+40-draft-package/lanxi-current-contact-sheet.png
+40-draft-package/previews/
+40-draft-package/spritesheet.png

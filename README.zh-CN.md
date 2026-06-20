@@ -15,7 +15,9 @@
 
 查看 Lanxi 中文展示页面：
 
-[`docs/index.zh-CN.html`](docs/index.zh-CN.html)
+[https://otrttf.github.io/oc-codex-pet-maker/index.zh-CN.html](https://otrttf.github.io/oc-codex-pet-maker/index.zh-CN.html)
+
+页面源码在 [`docs/index.zh-CN.html`](docs/index.zh-CN.html)。
 
 ![Lanxi 动画状态展示](docs/assets/lanxi-state-overview.png)
 
@@ -174,3 +176,7 @@ python3 scripts/validate_pet_package.py --package-dir 40-draft-package
 - 洋红色抠图边缘偶尔仍会有一点泛色，已经比早期版本好很多，后续还可以继续优化边缘清理。
 - 当前 Skill 是一个工作流入口，已经能指导流程并调用本地脚本，但还不是一键安装器。
 - 生成资产可能会让仓库变大，所以旧实验文件和 debug 文件默认不会纳入 Git。
+
+## License
+
+MIT。见 [`LICENSE`](LICENSE)。

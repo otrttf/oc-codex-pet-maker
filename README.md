@@ -15,7 +15,9 @@ This repository contains:
 
 See the Lanxi demo page:
 
-[`docs/index.html`](docs/index.html)
+[https://otrttf.github.io/oc-codex-pet-maker/](https://otrttf.github.io/oc-codex-pet-maker/)
+
+The source page lives at [`docs/index.html`](docs/index.html).
 
 ![Lanxi animated pet states](docs/assets/lanxi-state-overview.png)
 
@@ -174,3 +176,7 @@ python3 scripts/validate_pet_package.py --package-dir 40-draft-package
 - Slight magenta edge contamination can still appear after chroma removal. It is much better than the early versions, but further edge cleanup is a future improvement.
 - The current Skill is a draft entrypoint. It documents the workflow and calls the local scripts, but it is not yet packaged as a one-command installer.
 - Generated assets can make the repository large. Legacy experiments and debug files are intentionally ignored.
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).
