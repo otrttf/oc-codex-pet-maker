@@ -280,9 +280,26 @@
       }
 
       .gif-card span {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
         padding: 12px 14px 14px;
-        font-weight: 800;
         color: #222b3b;
+      }
+
+      .gif-card span b {
+        font-size: 18px;
+        line-height: 1.2;
+      }
+
+      .gif-card span em {
+        font-style: normal;
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: #667287;
+        white-space: nowrap;
       }
 
       .image-card {
@@ -485,7 +502,7 @@
       <header class="hero">
         <div class="hero-content">
           <p class="eyebrow">Codex Skill + Sprite Toolkit</p>
-          <h1>把你的 OC 做成精致的 Codex 小宠物。</h1>
+          <h1>把你的 OC 做成 Codex 小宠物。</h1>
           <p class="hero-copy">
             一套可复用的制作流程：角色规划、状态设计、动画横条清理、代码切图、
             最终打包与验证。Lanxi 是这个项目的完整展示案例。
@@ -509,39 +526,39 @@
         <div class="showcase-grid" aria-label="Animated Lanxi state previews">
           <figure class="gif-card">
             <img src="assets/lanxi-idle.gif" alt="Lanxi idle animation preview" />
-            <span>待机</span>
+            <span><em>Idle</em><b>待机</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-running-right.gif" alt="Lanxi skateboard glide right animation preview" />
-            <span>向右滑板</span>
+            <span><em>Running Right</em><b>向右滑板</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-running-left.gif" alt="Lanxi skateboard glide left animation preview" />
-            <span>向左滑板</span>
+            <span><em>Running Left</em><b>向左滑板</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-waving.gif" alt="Lanxi waving animation preview" />
-            <span>打招呼</span>
+            <span><em>Waving</em><b>打招呼</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-jumping.gif" alt="Lanxi jumping animation preview" />
-            <span>跳跃</span>
+            <span><em>Jumping</em><b>跳跃</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-failed.gif" alt="Lanxi failed state animation preview" />
-            <span>失败反馈</span>
+            <span><em>Failed</em><b>失败反馈</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-waiting.gif" alt="Lanxi waiting animation preview" />
-            <span>等待</span>
+            <span><em>Waiting</em><b>等待</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-running.gif" alt="Lanxi working animation preview" />
-            <span>处理中</span>
+            <span><em>Running</em><b>处理中</b></span>
           </figure>
           <figure class="gif-card">
             <img src="assets/lanxi-review.gif" alt="Lanxi review animation preview" />
-            <span>审阅</span>
+            <span><em>Review</em><b>审阅</b></span>
           </figure>
         </div>
       </section>
@@ -588,7 +605,7 @@
 
       <section class="section" id="workflow">
         <div class="section-header">
-          <h2 class="section-title">一套能避坑的紧凑流程。</h2>
+          <h2 class="section-title">一套包含了避坑经验的流程。</h2>
           <p class="section-note">
             具体细节放在 README 和指南里。这个页面只展示从角色想法到可验证宠物包的核心路径。
           </p>
@@ -620,7 +637,7 @@
       <section class="section">
         <div class="final-cta">
           <div>
-            <h2>先参考 Lanxi，再制作你自己的 OC 宠物。</h2>
+            <h2>参考 Lanxi 制作你自己的 OC 宠物。</h2>
             <p>
               仓库里包含 Skill 入口、脚本、模板、中英文指南、间距规则，以及完整的 Lanxi 示例包。
             </p>
