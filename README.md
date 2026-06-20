@@ -154,7 +154,7 @@ oc-codex-pet-maker/
 
 ## Lanxi Example
 
-Lanxi is the example pet used to develop this workflow. She is a cute-cool chibi virtual avatar with long aqua hair, school-uniform street-dance styling, and a small laptop/standing-desk workflow for `waiting` and `running` states.
+Lanxi is the example pet used to develop this workflow. She is a cute-cool chibi virtual avatar with long aqua hair, school-uniform street-dance styling, skateboard glide animations for `running-left` / `running-right`, and a small laptop/standing-desk workflow for `waiting` and `running` states.
 
 The example includes:
 

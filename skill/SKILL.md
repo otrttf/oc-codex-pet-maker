@@ -118,6 +118,6 @@ python3 scripts/validate_pet_package.py --package-dir <package-dir>
 ## Important Distinctions
 
 - `running` means task processing, not literal movement.
-- `running-right` and `running-left` are directional movement states.
+- `running-right` and `running-left` are directional movement states. They do not have to be literal running; a skateboard glide, hover, tiny dance step, or other compact directional action may be better for complex characters.
 - `waiting`, `running`, and `review` should have distinct actions.
 - Avoid detached effects, shadows, glows, text, labels, UI, and symbols unless intentionally part of the pet and cleanly cuttable.

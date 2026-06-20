@@ -154,7 +154,7 @@ oc-codex-pet-maker/
 
 ## Lanxi 示例
 
-Lanxi 是这个流程的示例宠物。她是一个可爱但有点酷的 Q 版虚拟形象：浅蓝长发、白色校服和街舞风外套，并在 `waiting` 和 `running` 状态里使用高桌和电脑。
+Lanxi 是这个流程的示例宠物。她是一个可爱但有点酷的 Q 版虚拟形象：浅蓝长发、白色校服和街舞风外套，`running-left` / `running-right` 使用滑板移动，并在 `waiting` 和 `running` 状态里使用高桌和电脑。
 
 示例包含：
 

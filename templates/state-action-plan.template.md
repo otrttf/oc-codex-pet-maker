@@ -32,8 +32,8 @@ Forbidden changes:
 | Row 行 | State 状态 | Meaning 含义 | Suggested Default Action 默认动作建议 | User Custom Action 用户自定义动作 | Approved 是否确认 |
 | --- | --- | --- | --- | --- | --- |
 | 0 | `idle` | Default calm state / 默认待机 | Subtle breathing, blink, tiny hair sway / 轻微呼吸、眨眼、头发小幅摆动 |  | no |
-| 1 | `running-right` | Drag/move right / 向右拖拽或移动 | Compact right-facing run or energetic step / 紧凑的向右跑步或活力小步伐 |  | no |
-| 2 | `running-left` | Drag/move left / 向左拖拽或移动 | Compact left-facing run or energetic step / 紧凑的向左跑步或活力小步伐 |  | no |
+| 1 | `running-right` | Drag/move right / 向右拖拽或移动 | Clear rightward movement, such as a small run, skateboard glide, hover, or dance step / 清晰向右移动，比如小跑、滑板、悬浮或舞步 |  | no |
+| 2 | `running-left` | Drag/move left / 向左拖拽或移动 | Clear leftward movement, such as a small run, skateboard glide, hover, or dance step / 清晰向左移动，比如小跑、滑板、悬浮或舞步 |  | no |
 | 3 | `waving` | Greeting / 打招呼 | Hand wave, no floating wave marks / 挥手，不加漂浮波纹或文字 |  | no |
 | 4 | `jumping` | Upbeat jump / 跳跃或开心反馈 | Small hop or bounce, full body visible / 小幅跳跃，全身始终可见 |  | no |
 | 5 | `failed` | Task failed/error / 任务失败或错误 | Slightly disappointed but recoverable reaction / 有点沮丧但仍有动力继续 |  | no |

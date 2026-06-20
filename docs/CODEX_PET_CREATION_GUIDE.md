@@ -120,8 +120,8 @@ Example Lanxi state plan:
 | State | Meaning | Lanxi Direction |
 | --- | --- | --- |
 | `idle` | default calm state | relaxed standing, tiny breathing/blink |
-| `running-right` | dragged/moving right | compact rightward dancer-run |
-| `running-left` | dragged/moving left | compact leftward dancer-run |
+| `running-right` | dragged/moving right | rightward skateboard glide |
+| `running-left` | dragged/moving left | leftward skateboard glide |
 | `waving` | greeting | hand wave, no wave marks |
 | `jumping` | small energetic hop | light hip-hop bounce |
 | `failed` | task failed | disappointed but motivated |
@@ -132,7 +132,7 @@ Example Lanxi state plan:
 Avoid semantic confusion:
 
 - `running` is not literal foot-running. It means task processing.
-- `running-right` and `running-left` are directional movement states.
+- `running-right` and `running-left` are directional movement states. They do not have to be literal running; a skateboard glide, hover, tiny dance step, or other clear directional action can work better for complex characters.
 - `waiting` should not duplicate `running`; make it a rest, stretch, or expectant pose.
 
 ## 6. Generate State References Before Animation Rows
@@ -346,18 +346,18 @@ More frames are not always better.
 - higher risk of frame bleed
 - more chances for anatomy drift
 
-For Lanxi, the 4-frame running-right test was technically cleaner first. The 8-frame version needed multiple iterations and component cleanup.
+For Lanxi, literal running caused repeated anatomy drift, accessory drift, and skirt/leg ambiguity. The final directional movement uses an 8-frame skateboard glide instead, with very stable lower-body motion.
 
 Recommended strategy:
 
-1. Generate a 4-frame test.
+1. Generate a 4-frame or 6-frame test.
 2. Validate style, pose, anatomy, and cleanup.
 3. Only then expand to 8 frames.
-4. If 8 frames keeps failing, use 4 frames for that row.
+4. If literal running keeps failing, change the action design instead of forcing it. A skateboard, hover, or compact glide can preserve the character better.
 
 ## 14. Mirror Only When It Is Semantically Safe
 
-Mirroring `running-right` to make `running-left` sounds tempting, but it can break identity.
+Mirroring one directional row to make the other sounds tempting, but it can break identity.
 
 For Lanxi, mirroring can flip:
 
@@ -366,7 +366,7 @@ For Lanxi, mirroring can flip:
 - accessory placement
 - hairstyle asymmetry
 
-If side-specific identity matters, generate `running-left` separately. If the character is symmetric, mirroring may be acceptable after visual inspection.
+If side-specific identity matters, generate both directions separately. If the character is symmetric enough at pet size, mirroring may be acceptable after visual inspection. Lanxi's final skateboard row accepts mirroring because the motion quality mattered more than tiny side-specific accessory placement in the directional drag state.
 
 ## 15. Keep A Clean Project Structure
 
@@ -416,8 +416,8 @@ Before building the final `spritesheet.webp`, check every row:
 
 For animation rows, also check:
 
-- running direction is correct
-- gait alternates naturally
+- directional movement reads correctly
+- the motion loop feels stable and intentional
 - no anatomy artifacts
 - no speed lines or dust
 - no props suddenly appearing or disappearing
@@ -461,14 +461,19 @@ The biggest lessons from Lanxi:
 - Keep versioned outputs so good ideas are not lost.
 - Write down character rules as soon as the design is approved.
 
-## 19. What Remains For Lanxi
+## 19. Lanxi Current Status
 
-Current remaining work:
+Lanxi now has a complete draft package:
 
-- finish reviewing `running-left`
-- generate or repair the other full animation rows
-- compose a full 9-row Codex spritesheet
-- validate `spritesheet.webp`
-- create final `pet.json`
-- produce final contact sheet and previews
-- update this README after the final package is ready
+- a validated 9-row `spritesheet.webp`
+- `pet.json`
+- curated row strips under `examples/lanxi/rows/`
+- English and Chinese README files
+- GitHub Pages showcase assets
+
+Remaining work is polish and release preparation:
+
+- observe the installed pet inside Codex
+- adjust any state that feels off in real use
+- keep only curated assets in the public release
+- move experiments and debug files to ignored legacy/debug folders
