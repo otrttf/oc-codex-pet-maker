@@ -119,6 +119,8 @@ Making a polished Codex pet is more fragile than making a nice illustration. The
 
 One of the biggest lessons from Lanxi was that generated horizontal strips often place frames too close together. This project includes spacing rules and a `smart-components` cutter that detects real character boundaries, warns about tight gutters, and avoids cutting neighboring hair or props into the wrong frame.
 
+This project is also informed by the Codex Hatch Pet Skill workflow, especially the 9-state pet contract, cell sizing, row-based spritesheet layout, and validation mindset. The repository is designed to be usable on its own: the reusable scripts, templates, and guides needed for this workflow live here.
+
 ## Guides
 
 - English guide: [`docs/CODEX_PET_CREATION_GUIDE.md`](docs/CODEX_PET_CREATION_GUIDE.md)

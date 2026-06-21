@@ -119,6 +119,8 @@ python3 scripts/validate_pet_package.py --package-dir 40-draft-package
 
 我们在制作 Lanxi 时踩过的最大坑之一，是 AI 生成的横条里每一帧距离太近。结果切图时，上一帧的头发会被切到下一帧里。这个项目提供了间距规范和 `smart-components` 切图模式，用代码识别真实角色边界，减少头发、衣服或道具串帧的问题。
 
+这个项目也参考了 Codex Hatch Pet Skill 的工作流，尤其是 9 个宠物状态、单格尺寸、按行动画图集和验证思路。不过这个仓库本身是可独立使用的：相关脚本、模板和指南都已经放在项目里。
+
 ## 文档
 
 - English guide: [`docs/CODEX_PET_CREATION_GUIDE.md`](docs/CODEX_PET_CREATION_GUIDE.md)
