@@ -124,6 +124,7 @@ One of the biggest lessons from Lanxi was that generated horizontal strips often
 - English guide: [`docs/CODEX_PET_CREATION_GUIDE.md`](docs/CODEX_PET_CREATION_GUIDE.md)
 - 中文指南：[`docs/CODEX_PET_CREATION_GUIDE.zh-CN.md`](docs/CODEX_PET_CREATION_GUIDE.zh-CN.md)
 - Sprite strip spacing rules: [`docs/SPRITE_STRIP_SPACING_RULES.md`](docs/SPRITE_STRIP_SPACING_RULES.md)
+- Showcase GIF shadow notes: [`docs/SHOWCASE_GIF_SHADOW_NOTES.md`](docs/SHOWCASE_GIF_SHADOW_NOTES.md)
 - GitHub publishing notes: [`docs/GITHUB_PUBLISHING_NOTES.zh-CN.md`](docs/GITHUB_PUBLISHING_NOTES.zh-CN.md)
 - Roadmap: [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
@@ -144,6 +145,7 @@ oc-codex-pet-maker/
     CODEX_PET_CREATION_GUIDE.zh-CN.md
     GITHUB_PUBLISHING_NOTES.zh-CN.md
     SPRITE_STRIP_SPACING_RULES.md
+    SHOWCASE_GIF_SHADOW_NOTES.md
     ROADMAP.md
   examples/
     lanxi/

@@ -279,6 +279,13 @@
         object-fit: cover;
       }
 
+      .gif-card img.showcase-shadow {
+        background: transparent;
+        filter:
+          drop-shadow(11px 14px 18px rgba(18, 24, 38, 0.3))
+          drop-shadow(5px 7px 5px rgba(18, 24, 38, 0.34));
+      }
+
       .gif-card span {
         padding: 12px 14px 14px;
         font-weight: 800;
@@ -512,11 +519,11 @@
             <span>Idle</span>
           </figure>
           <figure class="gif-card">
-            <img src="assets/lanxi-running-right.gif" alt="Lanxi skateboard glide right animation preview" />
+            <img class="showcase-shadow" src="assets/lanxi-running-right.webp" alt="Lanxi skateboard glide right animation preview" />
             <span>Running Right</span>
           </figure>
           <figure class="gif-card">
-            <img src="assets/lanxi-running-left.gif" alt="Lanxi skateboard glide left animation preview" />
+            <img class="showcase-shadow" src="assets/lanxi-running-left.webp" alt="Lanxi skateboard glide left animation preview" />
             <span>Running Left</span>
           </figure>
           <figure class="gif-card">
