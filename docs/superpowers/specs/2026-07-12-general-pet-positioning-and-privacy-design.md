@@ -58,6 +58,25 @@ Public templates and examples should teach a sentence structure rather than disc
 
 Examples should use placeholders or a deliberately generic fictional pet. They must not reuse Lanxi's private traits.
 
+Templates must also avoid assuming a humanoid subject. Terms such as hair, eyes, outfit, hands, waving, typing, and full body should either be optional examples or be replaced by broader concepts such as silhouette, surface or material, markings, attached features, greeting gesture, focused work motion, and complete visible form. A cat, slime, robot, cup, plant, or abstract icon should all be describable without forcing human anatomy or clothing.
+
+## First-Time User Journey
+
+The public instructions should distinguish these starting points:
+
+- text-only pet concept;
+- one or more existing reference images;
+- non-character source such as a real animal, object, plant, logo-free brand cue, or abstract symbol;
+- existing row strips or spritesheet that needs repair.
+
+For each applicable path, explain how the user obtains or imports a canonical reference, where files are saved, how they are named, what must be approved before row generation, and what to do when an image model cannot produce the requested number of separated poses. The project must not imply that its deterministic scripts generate visual artwork.
+
+The installation guide should clearly separate a package that validates locally from a pet confirmed to load in Codex Desktop. It should document only behavior supported by current evidence. If enabling, reloading, selecting, state testing, or uninstalling a pet cannot be verified from the repository or current app behavior, say so explicitly rather than presenting the local target directory as a guaranteed installation contract.
+
+Generic command examples must use placeholder user paths and manifests instead of silently operating on the Lanxi example package. Lanxi-specific commands may remain only in a clearly labeled case-study section.
+
+Local package validation must be described accurately as structural validation, not complete visual QA. Documentation should list what the validator does not prove, including state semantics, identity consistency, clipping, frame bleed, chroma artifacts, motion quality, and loop quality.
+
 ## Files in Scope
 
 - `README.md` and `README.zh-CN.md`;
@@ -78,4 +97,6 @@ Generated assets and finished Lanxi showcase media remain unchanged.
 - Run `git diff --check`.
 - Run the existing pet-package validator.
 - Use the separate first-time-user simulation task to identify remaining scope, privacy, and onboarding problems.
-
+- Confirm generic templates do not require humanoid anatomy, clothing, or gestures.
+- Confirm generic commands do not default to Lanxi paths.
+- Confirm generation/import and package/install boundaries are stated without unsupported Codex Desktop claims.
