@@ -109,4 +109,7 @@
 
 ### 发布状态
 
-- 等待本次提交和推送完成后更新。
+- 已创建提交 `208f982`：`docs: generalize Codex Pet Maker workflow`。
+- 本地 `main` 已推送到 GitHub `origin/main`。
+- GitHub `main` 已从 `4a3eb69` 更新到 `208f982`。
+- 内部交接文档 `docs/HANDOFF.zh-CN.md` 未纳入公开提交。
