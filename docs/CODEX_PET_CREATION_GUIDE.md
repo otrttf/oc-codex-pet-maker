@@ -1,6 +1,6 @@
 # How To Make A Polished Codex Pet
 
-This guide summarizes the workflow and lessons learned while creating Lanxi, a custom Codex desktop pet. It is written as a reusable production checklist, not only as project notes.
+This guide turns lessons from a real Codex pet production run into a reusable checklist. Private creative prompts and identifying design details from the finished case study are intentionally omitted.
 
 ## 1. Understand The Codex Pet Format
 
@@ -59,49 +59,50 @@ templates/state-action-plan.template.md
 
 Do not generate state images until the user has approved either the default state action plan or a customized one.
 
-## 3. Start With The Character, Not The Spritesheet
+## 3. Start With The Pet, Not The Spritesheet
 
-Do not begin by asking for a full spritesheet. First create and approve a single canonical character.
+Do not begin by asking for a full spritesheet. First create or import and approve one canonical pet reference.
 
-For Lanxi, the early versions looked nice as illustrations but were too detailed for a small desktop pet. The better path was:
+Choose the appropriate starting path:
 
-1. Create the main avatar concept.
-2. Simplify it into a Q-version / chibi version.
-3. Lock a canonical reference.
-4. Write a character spec.
-5. Use that spec for every later state and row.
+1. **Text-only concept:** generate a base pet image before making state rows.
+2. **Existing reference images:** select or combine them into one approved visual source of truth.
+3. **Animal, object, plant, robot, mascot, or abstract subject:** describe silhouette, material, markings, attached features, palette, and motion without forcing humanoid anatomy.
+4. **Existing strips or spritesheet:** preserve the accepted identity and repair only the failing rows or packaging steps.
 
-The character spec should include:
+Save the approved source as `canonical-reference.png`. Record:
 
-- fixed hair color and shape
-- eyes
-- signature accessories
-- outfit
-- shoes and socks
+- pet type or subject
+- silhouette and proportions
+- surface or material
+- markings and attached features
 - palette
-- body proportion
-- personality
+- personality or overall feeling
 - forbidden changes
-- motion-specific rules
+- directional asymmetry and motion-specific rules
 
-For Lanxi, the spec also includes a special rule: running and jumping states must include white safety shorts / bloomers under the skirt.
+Approve the canonical reference only when it remains readable at `192x208`, shows the complete pet form, has no unintended text or effects, and contains every feature that must remain consistent.
+
+The artwork can come from Codex image generation, another image tool, or user-supplied files. The Python scripts in this repository do not invent visual artwork; they process supplied strips deterministically. Save imported state references under a project-owned folder such as `20-states/`, and save source strips with the state name, for example `idle-source.png`.
+
+If an image model cannot produce the exact number of separated poses, do not duplicate frames silently. Retry with a simpler motion, smaller pet scale, and wider gutters; test 4 or 6 frames to validate the idea, then generate a fresh 8-frame production row because the final atlas uses 8 columns.
 
 ## 4. Make The Character Sprite-Friendly
 
 Pretty illustration detail does not automatically survive `192x208`.
 
-Sprite-friendly means:
+Pet-safe means:
 
 - large readable silhouette
-- simple hair shapes
-- clear face
-- limited tiny accessories
+- simple readable masses
+- clear expression or focal feature
+- limited tiny attached details
 - no thin loose decorations
 - no floating effects
 - no shadows or soft glows
-- full body visible with padding
+- complete pet form visible with padding
 
-For long-haired characters, hair is the biggest risk. Long hair must be visually beautiful but physically compact enough to fit inside each frame.
+Wide silhouettes, trailing features, leaves, tails, antennae, cables, or props must remain compact enough to fit inside each frame.
 
 Good rule:
 
@@ -109,31 +110,31 @@ Good rule:
 The character should occupy about 75-85% of the final cell height.
 ```
 
-For motion-heavy rows like running and jumping, use smaller and more compact poses.
+For motion-heavy rows, use smaller and more compact poses.
 
 ## 5. Define The Pet States Before Generating Rows
 
 Do not let every state become a random cute pose. Define each state clearly.
 
-Example Lanxi state plan:
+Fill in the action plan with the user's own choices:
 
-| State | Meaning | Lanxi Direction |
+| State | Meaning | User action |
 | --- | --- | --- |
-| `idle` | default calm state | relaxed standing, tiny breathing/blink |
-| `running-right` | dragged/moving right | rightward skateboard glide |
-| `running-left` | dragged/moving left | leftward skateboard glide |
-| `waving` | greeting | hand wave, no wave marks |
-| `jumping` | small energetic hop | light hip-hop bounce |
-| `failed` | task failed | disappointed but motivated |
-| `waiting` | waiting for user | stretch beside high standing desk |
-| `running` | task processing | typing at high standing desk |
-| `review` | reviewing result | focused checking pose |
+| `idle` | default calm state | … |
+| `running-right` | dragged/moving right | … |
+| `running-left` | dragged/moving left | … |
+| `waving` | greeting | … |
+| `jumping` | upbeat response | … |
+| `failed` | task failed | … |
+| `waiting` | waiting for user | … |
+| `running` | task processing | … |
+| `review` | reviewing result | … |
 
 Avoid semantic confusion:
 
 - `running` is not literal foot-running. It means task processing.
-- `running-right` and `running-left` are directional movement states. They do not have to be literal running; a skateboard glide, hover, tiny dance step, or other clear directional action can work better for complex characters.
-- `waiting` should not duplicate `running`; make it a rest, stretch, or expectant pose.
+- `running-right` and `running-left` are directional movement states. They can use any compact travel motion appropriate to the pet's form.
+- `waiting` should not duplicate `running`; make their intentions visibly distinct.
 
 ## 6. Generate State References Before Animation Rows
 
@@ -153,9 +154,9 @@ Recommended order:
 
 For each state reference, check:
 
-- Does it still look like the same character?
-- Are signature accessories preserved?
-- Is the body readable at small size?
+- Does it still look like the same pet?
+- Are signature markings and attached features preserved?
+- Is the complete form readable at small size?
 - Does the pose match the state?
 - Does anything stick too far left or right?
 - Are there extra props that will make the final sprite too wide?
@@ -179,7 +180,7 @@ Prompt rules:
 - no shadows
 - no motion effects
 - no floating symbols
-- full body visible in every frame
+- complete pet form visible in every frame
 
 Why this matters:
 
@@ -190,7 +191,7 @@ The final pet needs transparent frames. A clean chroma background makes it possi
 One major failure mode was frame bleed:
 
 ```text
-The right side of one frame's hair appeared in the left side of the next frame.
+The trailing feature from one frame appeared in the neighboring frame.
 ```
 
 This happened because the generated strip placed poses too close together. When the strip was split into equal cells, part of one character entered the neighboring frame.
@@ -199,15 +200,14 @@ Avoid it by prompting for:
 
 - very wide empty gutters
 - smaller character scale
-- compact hair
-- no wide flying hair
-- no clothing or hair near frame edges
+- compact silhouette and attached features
+- no wide trailing details
+- no pet parts or props near frame edges
 
 Also verify with actual cutting, not only with the original image.
 
 For future prompts, use the stricter reusable spacing rules in:
 
-```text
 docs/SPRITE_STRIP_SPACING_RULES.md
 ```
 
@@ -222,7 +222,7 @@ If the character or prop is too wide, shrink the character and prop uniformly; n
 
 Do not approve a row by looking only at the generated strip. Always cut it into final cells and preview those cells.
 
-For Lanxi, we use:
+Use:
 
 ```bash
 python3 scripts/cut_strip_to_cells.py \
@@ -247,7 +247,7 @@ For AI-generated horizontal strips, prefer:
 --mode smart-components
 ```
 
-This mode detects each character's real bounding box across the full strip before cropping. It prevents equal-width cut lines from slicing off hair or clothing when the generated frames are not perfectly aligned.
+This mode detects each pet component's real bounding box across the full strip before cropping. It prevents equal-width cut lines from slicing off attached features when generated frames are not perfectly aligned.
 
 Use `--mode equal-slots` only when the source strip was created from a strict grid and every frame is already guaranteed to stay inside its slot.
 
@@ -259,7 +259,7 @@ spacing_summary.warnings
 component_diagnostics[].effective_padding_px
 ```
 
-By default, `smart-components` uses adaptive left/right padding. This means a requested `--component-padding 22` will automatically shrink near a tight neighboring frame instead of cutting in hair or prop fragments from the next frame.
+By default, `smart-components` uses adaptive left/right padding. This means a requested `--component-padding 22` will automatically shrink near a tight neighboring frame instead of cutting in pet or prop fragments from the next frame.
 
 For strict QA, add:
 
@@ -279,18 +279,18 @@ The `cut_strip_to_cells.py` script does this:
 
 1. Remove magenta background.
 2. Detect connected components.
-3. Keep the main character component.
-4. Keep small nearby components that belong to the character.
+3. Keep the main pet component.
+4. Keep small nearby components that belong to the pet.
 5. Remove far-away detached fragments.
 
-This prevents a strand of hair from one frame appearing in the next frame.
+This prevents an attached or trailing feature from one frame appearing in the next frame.
 
 ## 11. Clean Magenta Edge Contamination
 
 Another failure mode was magenta halo:
 
 ```text
-The character looked like it had a pink glow after chroma removal.
+The pet looked like it had a pink glow after chroma removal.
 ```
 
 This happens because anti-aliased edge pixels blend the character with the magenta background.
@@ -305,28 +305,18 @@ Mitigation:
 
 Do not approve a row only on a pink background. A halo can hide there.
 
-## 12. Watch For Anatomy Artifacts
+## 12. Watch For Generated Structure Artifacts
 
-AI-generated animation rows often create tiny but distracting anatomy errors.
-
-Lanxi-specific examples:
-
-- a small round flesh-colored bump beside the front leg
-- upper thigh crossing that looked like a fork
-- the silver `X` charm falling between the legs
-- skirt and leg shapes merging during running
-
-Prompt against these explicitly:
+AI-generated animation rows often create small but distracting structural errors: duplicated parts, merged shapes, detached fragments, changing markings, or props crossing through the pet. Describe the actual failure in a short repair prompt:
 
 ```text
-No small round protrusion beside the front leg.
-No stray thigh blob.
-No X-shaped crossing between the legs.
-The X waist charm must not fall between the thighs.
-The skirt hem, safety shorts, socks, and legs must be visually separate.
+Keep the approved silhouette and attached features unchanged.
+Remove the detached or duplicated fragment at: …
+Keep these shapes visually separate: …
+Do not move this marking or prop: …
 ```
 
-For skirted characters, add safety shorts / bloomers for running and jumping states. This is both a design choice and a practical animation-safety rule.
+Repair prompts should identify only the visible defect and the approved feature that must remain stable; do not expose or copy another pet's private design specification.
 
 ## 13. Decide When To Use 4 Frames Vs 8 Frames
 
@@ -346,27 +336,18 @@ More frames are not always better.
 - higher risk of frame bleed
 - more chances for anatomy drift
 
-For Lanxi, literal running caused repeated anatomy drift, accessory drift, and skirt/leg ambiguity. The final directional movement uses an 8-frame skateboard glide instead, with very stable lower-body motion.
-
 Recommended strategy:
 
 1. Generate a 4-frame or 6-frame test.
 2. Validate style, pose, anatomy, and cleanup.
 3. Only then expand to 8 frames.
-4. If literal running keeps failing, change the action design instead of forcing it. A skateboard, hover, or compact glide can preserve the character better.
+4. If an action keeps failing, simplify or change the motion instead of forcing it. Preserve the pet identity and state meaning.
 
 ## 14. Mirror Only When It Is Semantically Safe
 
 Mirroring one directional row to make the other sounds tempting, but it can break identity.
 
-For Lanxi, mirroring can flip:
-
-- `J` hair clip side
-- `H` earring side
-- accessory placement
-- hairstyle asymmetry
-
-If side-specific identity matters, generate both directions separately. If the character is symmetric enough at pet size, mirroring may be acceptable after visual inspection. Lanxi's final skateboard row accepts mirroring because the motion quality mattered more than tiny side-specific accessory placement in the directional drag state.
+Mirroring can flip markings, symbols, attached features, prop placement, or asymmetric silhouettes. If side-specific identity matters, generate both directions separately. If the pet is symmetric enough at pet size, mirroring may be acceptable only after visual inspection.
 
 ## 15. Keep A Clean Project Structure
 
@@ -386,7 +367,7 @@ Project/
   90-debug/
 ```
 
-For Lanxi:
+Example project mapping:
 
 - current references are in `10-references`
 - state references are in `20-states`
@@ -398,11 +379,11 @@ For Lanxi:
 
 Before building the final `spritesheet.webp`, check every row:
 
-- same character identity
-- same face
-- same outfit
-- same accessory placement
-- no cropped hair or shoes
+- same pet identity
+- same focal features
+- same material and palette
+- same marking and attached-feature placement
+- no cropped pet parts or props
 - no frame bleed
 - no detached fragments
 - no magenta halo
@@ -418,7 +399,7 @@ For animation rows, also check:
 
 - directional movement reads correctly
 - the motion loop feels stable and intentional
-- no anatomy artifacts
+- no structural artifacts
 - no speed lines or dust
 - no props suddenly appearing or disappearing
 
@@ -426,12 +407,12 @@ For animation rows, also check:
 
 Use this as the reusable process:
 
-1. Write the character concept.
+1. Write the pet concept or collect source references.
 2. Generate a main reference.
-3. Iterate until the character is emotionally and visually right.
-4. Simplify into a Q-version if the original is too detailed.
+3. Iterate until the pet is emotionally and visually right.
+4. Simplify the design if the original is too detailed at pet size.
 5. Save a canonical reference.
-6. Write a character spec.
+6. Write a pet identity spec.
 7. Define the 9 Codex states.
 8. Generate single-image references for each state.
 9. Make a `192x208` fit preview for all state references.
@@ -447,23 +428,23 @@ Use this as the reusable process:
 19. Review final contact sheet and GIF previews.
 20. Move old experiments to `80-legacy` or `90-debug`.
 
-## 18. Current Lanxi Lessons
+## 18. Reusable Production Lessons
 
-The biggest lessons from Lanxi:
+The biggest reusable lessons:
 
-- A beautiful character image is not enough; it must survive `192x208`.
-- Long hair needs strict padding rules.
+- A beautiful source image is not enough; it must survive `192x208`.
+- Wide or trailing features need strict padding rules.
 - Frame strips must be tested by actual slicing.
 - Do not trust the original generated strip alone.
 - A row can look good on magenta but fail on transparency.
 - Component cleanup is essential for generated strips.
 - Prompting alone cannot fix every artifact; deterministic post-processing is part of the pipeline.
 - Keep versioned outputs so good ideas are not lost.
-- Write down character rules as soon as the design is approved.
+- Write down pet identity rules as soon as the design is approved.
 
-## 19. Lanxi Current Status
+## 19. Finished Case Study
 
-Lanxi now has a complete draft package:
+Lanxi is retained as the finished visual case study. Its public package includes:
 
 - a validated 9-row `spritesheet.webp`
 - `pet.json`
@@ -471,7 +452,7 @@ Lanxi now has a complete draft package:
 - English and Chinese README files
 - GitHub Pages showcase assets
 
-Remaining work is polish and release preparation:
+The reusable guides intentionally omit Lanxi's private prompt, styling specification, and state-action brief. Remaining project work is polish and release preparation:
 
 - observe the installed pet inside Codex
 - adjust any state that feels off in real use

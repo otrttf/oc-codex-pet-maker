@@ -46,7 +46,7 @@ When regenerating page showcase animations from transparent pet frames:
 
    - **Near-edge core:** alpha blur radius `2-4`, dark blue/black, opacity around `35-45%`, offset roughly `(3, 5)`.
    - **Outer haze:** alpha blur radius `8-14`, dark blue/black, opacity around `14-24%`, offset roughly `(6, 8)`.
-   - **Optional contact emphasis:** stronger local shadow near feet/skateboard if the character looks detached.
+   - **Optional contact emphasis:** stronger local shadow near the lowest contact area if the pet looks detached.
 
 5. Composite shadow layers before the character frame.
 6. Save as animated GIF with the same timing as the source preview.

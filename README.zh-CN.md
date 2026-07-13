@@ -1,8 +1,8 @@
-# OC Codex Pet Maker Skill
+# Codex Pet Maker Skill
 
 [English](README.md) | [中文](README.zh-CN.md)
 
-把你的 OC、虚拟形象或头像概念，制作成可以在 Codex 桌面端使用的小宠物。这个项目整理了一套可复用流程：状态规划、角色参考图、动画横条、自动切图、质量检查、Spritesheet 打包和本地安装。
+把动物创意、吉祥物、品牌或产品灵感、已有作品、头像、参考图片或纯文字概念，制作成可以在 Codex 桌面端使用的小宠物。这个项目整理了一套可复用流程：状态规划、图片生成或导入、动画横条、自动切图、质量检查和 Spritesheet 打包。
 
 这个仓库包含：
 
@@ -31,20 +31,33 @@ python3 -m pip install Pillow
 
 ### 1. 安装 Skill
 
-把 `skill/` 目录复制到 Codex 的 skills 目录：
+把自包含的 `skill/` 目录复制到 Codex 的 skills 目录：
 
 ```bash
 mkdir -p ~/.codex/skills/oc-codex-pet-maker
 cp -R skill/* ~/.codex/skills/oc-codex-pet-maker/
 ```
 
+安装后的 Skill 会包含入口文件、必要模板、Sprite 横条间距规则和 Python 脚本。也就是说，新开 Codex 对话后，Skill 引用的路径可以直接在已安装的 Skill 目录里找到，不依赖原始仓库目录。
+
 然后新开一个 Codex 对话，可以这样说：
 
 ```text
-Use the OC Codex Pet Maker skill to help me create a Codex pet for my OC.
+请使用 Codex Pet Maker Skill 帮我制作一个 Codex 宠物。
+宠物创意或素材来源：……
+视觉风格或材质：……
+必须保留的标志性特征：……
 ```
 
 Skill 应该先向你说明 Codex 宠物的 9 个状态，并帮助你确认每个状态对应的动作方案，然后再开始生成图片。
+
+第一次使用时，理想流程是：
+
+1. 读取 Skill 入口。
+2. 说明 Codex 宠物的 9 个状态。
+3. 填写或调整状态动作方案。
+4. 等你确认后，再进入图片生成。
+5. 生成横条、切图、检查预览、合成 spritesheet，并验证宠物包。
 
 ### 2. 制定状态动作方案
 
@@ -65,6 +78,8 @@ Codex 宠物通常有 9 个动画状态：
 可以使用这个模板：
 
 [`templates/state-action-plan.template.md`](templates/state-action-plan.template.md)
+
+安装 Skill 后，同一个模板也会在已安装的 Skill 目录里。
 
 ### 3. 生成并切分动画横条
 
@@ -95,16 +110,21 @@ python3 scripts/cut_strip_to_cells.py \
 
 ```bash
 python3 scripts/compose_spritesheet.py \
-  --manifest examples/lanxi/rows-manifest.json \
-  --out 40-draft-package/spritesheet.png \
-  --webp-out 40-draft-package/spritesheet.webp
+  --manifest /absolute/path/to/your-pet/rows-manifest.json \
+  --out /absolute/path/to/your-pet/package/spritesheet.png \
+  --webp-out /absolute/path/to/your-pet/package/spritesheet.webp
 ```
 
 验证宠物包：
 
 ```bash
-python3 scripts/validate_pet_package.py --package-dir 40-draft-package
+python3 scripts/validate_pet_package.py \
+  --package-dir /absolute/path/to/your-pet/package
 ```
+
+创建宠物包元数据时，可以使用这个模板：
+
+[`templates/pet-json.template.json`](templates/pet-json.template.json)
 
 ## 为什么需要这个项目
 
@@ -113,19 +133,34 @@ python3 scripts/validate_pet_package.py --package-dir 40-draft-package
 - 每格只有 `192x208`
 - 9 个不同应用状态
 - 干净的透明背景
-- 长发、大动作和道具不能被裁切
+- 宽轮廓、附着特征和道具不能被裁切
 - 每行动画要稳定一致
 - 最后必须打包成 `spritesheet.webp`
 
-我们在制作 Lanxi 时踩过的最大坑之一，是 AI 生成的横条里每一帧距离太近。结果切图时，上一帧的头发会被切到下一帧里。这个项目提供了间距规范和 `smart-components` 切图模式，用代码识别真实角色边界，减少头发、衣服或道具串帧的问题。
+制作真实宠物时最常见的坑之一，是 AI 生成的横条里每一帧距离太近。结果切图时，上一帧的附着特征会被切到下一帧里。这个项目提供间距规范和 `smart-components` 切图模式，用代码识别主体边界，减少特征或道具串帧。
 
-这个项目也参考了 Codex Hatch Pet Skill 的工作流，尤其是 9 个宠物状态、单格尺寸、按行动画图集和验证思路。不过这个仓库本身是可独立使用的：相关脚本、模板和指南都已经放在项目里。
+## 与 Hatch Pet 的关系
+
+这个项目来源于一次真实使用 Codex Hatch Pet Skill 的制作实践。Hatch Pet 提供从创意或参考图到宠物打包的一体化、代理编排流程；Codex Pet Maker 则是配套工具箱，适合希望查看中间过程、自定义方案、理解制作原理或局部修复的用户。
+
+它重点解决实际使用 Hatch Pet 时可能遇到的问题：
+
+- 混淆 9 个应用状态，尤其是方向移动和任务处理状态 `running`
+- 不同行之间出现身份、比例、颜色、材质或道具漂移
+- 帧间距太窄，导致相邻特征被切进错误格子
+- 色键残留、透明像素污染和有色边缘泛色
+- 宠物存在左右不对称标记、附着特征或道具时盲目镜像
+- 图集尺寸正确，但动作弱、大小跳变、方向错误或状态语义不清
+- 只想检查和修复一行，却不得不重新生成整只宠物
+
+仓库公开保留状态规划模板、中间文件约定、间距规则、确定性脚本和 QA 方法。它不是 Hatch Pet 的替代品；Hatch Pet 的能力也可能随着 Codex 持续更新。
 
 ## 文档
 
 - English guide: [`docs/CODEX_PET_CREATION_GUIDE.md`](docs/CODEX_PET_CREATION_GUIDE.md)
 - 中文制作指南：[`docs/CODEX_PET_CREATION_GUIDE.zh-CN.md`](docs/CODEX_PET_CREATION_GUIDE.zh-CN.md)
 - Sprite 横条间距规则：[`docs/SPRITE_STRIP_SPACING_RULES.md`](docs/SPRITE_STRIP_SPACING_RULES.md)
+- 安装说明：[`docs/INSTALLATION.md`](docs/INSTALLATION.md)
 - 展示 GIF 阴影记录：[`docs/SHOWCASE_GIF_SHADOW_NOTES.md`](docs/SHOWCASE_GIF_SHADOW_NOTES.md)
 - GitHub 发布经验：[`docs/GITHUB_PUBLISHING_NOTES.zh-CN.md`](docs/GITHUB_PUBLISHING_NOTES.zh-CN.md)
 - Roadmap：[`docs/ROADMAP.md`](docs/ROADMAP.md)
@@ -136,16 +171,33 @@ python3 scripts/validate_pet_package.py --package-dir 40-draft-package
 oc-codex-pet-maker/
   skill/
     SKILL.md
+    docs/
+      SPRITE_STRIP_SPACING_RULES.md
+    scripts/
+      cut_strip_to_cells.py
+      compose_spritesheet.py
+      validate_pet_package.py
+    templates/
+      state-action-plan.template.md
+      state-reference-prompt.template.md
+      sprite-strip-prompt.template.md
+      rows-manifest.template.json
+      pet-json.template.json
   scripts/
     cut_strip_to_cells.py
     compose_spritesheet.py
     validate_pet_package.py
   templates/
     state-action-plan.template.md
+    state-reference-prompt.template.md
+    sprite-strip-prompt.template.md
+    rows-manifest.template.json
+    pet-json.template.json
   docs/
     CODEX_PET_CREATION_GUIDE.md
     CODEX_PET_CREATION_GUIDE.zh-CN.md
     GITHUB_PUBLISHING_NOTES.zh-CN.md
+    INSTALLATION.md
     SPRITE_STRIP_SPACING_RULES.md
     SHOWCASE_GIF_SHADOW_NOTES.md
     ROADMAP.md
@@ -160,7 +212,7 @@ oc-codex-pet-maker/
 
 ## Lanxi 示例
 
-Lanxi 是这个流程的示例宠物。她是一个可爱但有点酷的 Q 版虚拟形象：浅蓝长发、白色校服和街舞风外套，`running-left` / `running-right` 使用滑板移动，并在 `waiting` 和 `running` 状态里使用高桌和电脑。
+Lanxi 是用于开发和验证这套流程的最终案例。公开展示会保留宠物成品图片和动画结果，但通用说明会有意省略其背后的私人创作设定和 prompt。
 
 示例包含：
 

@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OC Codex Pet Maker Skill | 中文</title>
+    <title>Codex Pet Maker Skill | 中文</title>
     <meta
       name="description"
-      content="一套可复用的 Codex Skill 与工作流，用来把 OC 或虚拟形象制作成精致的 Codex 桌面宠物。"
+      content="一套可复用的 Codex Skill 配套工作流，用来把创意、参考图、已有作品、吉祥物或 sprite 素材制作成 Codex 桌面宠物。"
     />
     <style>
       :root {
@@ -511,8 +511,8 @@
     <main class="site-shell">
       <nav class="topbar" aria-label="Primary navigation">
         <div class="brand">
-          <div class="brand-mark">OC</div>
-          <span>OC Codex Pet Maker</span>
+          <div class="brand-mark">P</div>
+          <span>Codex Pet Maker</span>
         </div>
         <div class="nav">
           <a href="#showcase">效果展示</a>
@@ -526,10 +526,10 @@
       <header class="hero">
         <div class="hero-content">
           <p class="eyebrow">Codex Skill + Sprite Toolkit</p>
-          <h1>把你的 OC 做成 Codex 小宠物。</h1>
+          <h1>把任何宠物创意做成 Codex 小宠物。</h1>
           <p class="hero-copy">
-            一套可复用的制作流程：角色规划、状态设计、动画横条清理、代码切图、
-            最终打包与验证。Lanxi 是这个项目的完整展示案例。
+            可以从动物、吉祥物、品牌灵感、已有作品、头像、参考图片、纯文字概念或现有 sprite 开始。
+            先规划状态，再查看中间过程、修复失败动画行并完成打包。Lanxi 保留为最终视觉案例。
           </p>
           <div class="actions">
             <a class="button primary" href="https://github.com/otrttf/oc-codex-pet-maker/blob/main/README.zh-CN.md">查看中文 README</a>
@@ -554,13 +554,13 @@
           </figure>
           <figure class="gif-card">
             <div class="preview-frame">
-              <img class="showcase-shadow" src="assets/lanxi-running-right.webp" alt="Lanxi skateboard glide right animation preview" />
+              <img class="showcase-shadow" src="assets/lanxi-running-right.webp" alt="Lanxi directional movement right animation preview" />
             </div>
             <span><em>Running Right</em><b>向右跑</b></span>
           </figure>
           <figure class="gif-card">
             <div class="preview-frame">
-              <img class="showcase-shadow" src="assets/lanxi-running-left.webp" alt="Lanxi skateboard glide left animation preview" />
+              <img class="showcase-shadow" src="assets/lanxi-running-left.webp" alt="Lanxi directional movement left animation preview" />
             </div>
             <span><em>Running Left</em><b>向左跑</b></span>
           </figure>
@@ -614,13 +614,13 @@
             <h2 class="section-title">先把隐藏的状态规则讲清楚。</h2>
             <p class="section-note">
               Skill 会先说明 Codex 宠物有哪些状态，再询问用户每个状态是使用默认动作，
-              还是为自己的 OC 定制更贴合的动作。
+              还是为自己的宠物设计更贴合的动作。
             </p>
           </div>
           <div class="state-list" aria-label="Codex pet states">
             <div class="state-pill"><strong class="mono">0</strong><span><b>idle</b> 默认待机状态</span></div>
-            <div class="state-pill"><strong class="mono">1</strong><span><b>running-right</b> 向右跑</span></div>
-            <div class="state-pill"><strong class="mono">2</strong><span><b>running-left</b> 向左跑</span></div>
+            <div class="state-pill"><strong class="mono">1</strong><span><b>running-right</b> 向右移动</span></div>
+            <div class="state-pill"><strong class="mono">2</strong><span><b>running-left</b> 向左移动</span></div>
             <div class="state-pill"><strong class="mono">3</strong><span><b>waving</b> 打招呼</span></div>
             <div class="state-pill"><strong class="mono">4</strong><span><b>jumping</b> 跳跃或开心反馈</span></div>
             <div class="state-pill"><strong class="mono">5</strong><span><b>failed</b> 任务失败或可恢复错误</span></div>
@@ -635,7 +635,7 @@
         <div class="section-header">
           <h2 class="section-title">一套包含了避坑经验的流程。</h2>
           <p class="section-note">
-            具体细节放在 README 和指南里。这个页面只展示从角色想法到可验证宠物包的核心路径。
+            具体细节放在 README 和指南里。这个页面只展示从宠物想法或素材到结构验证通过的宠物包的核心路径。
           </p>
         </div>
         <div class="pipeline">
@@ -646,13 +646,13 @@
           </article>
           <article class="step-card">
             <div class="step-kicker">2</div>
-            <h3>锁定角色</h3>
-            <p>先确认简化后的 Q 版参考图，并写清楚必须保留和禁止改变的特征。</p>
+            <h3>锁定宠物身份</h3>
+            <p>确认一张标准参考图，固定轮廓、材质、配色、标记和附着特征。</p>
           </article>
           <article class="step-card">
             <div class="step-kicker">3</div>
             <h3>用代码切图</h3>
-            <p>用组件识别来切分动画横条，避免头发、道具和大动作串到相邻帧。</p>
+            <p>用组件识别来切分动画横条，避免宠物特征、道具和大动作串到相邻帧。</p>
           </article>
           <article class="step-card">
             <div class="step-kicker">4</div>
@@ -665,9 +665,11 @@
       <section class="section">
         <div class="final-cta">
           <div>
-            <h2>参考 Lanxi 制作你自己的 OC 宠物。</h2>
+            <h2>来自真实 Hatch Pet 制作过程的避坑经验。</h2>
             <p>
-              仓库里包含 Skill 入口、脚本、模板、中英文指南、间距规则，以及完整的 Lanxi 示例包。
+              Hatch Pet 提供一体化孵化流程；这个配套工具箱则公开状态规划模板、中间文件、间距与切图规则、
+              视觉诊断和单行修复方法，用来处理身份漂移、串帧、色键残留、不安全镜像和动作观感问题。
+              它用于补充 Hatch Pet，而不是替代 Hatch Pet。
             </p>
           </div>
           <a class="button primary" href="https://github.com/otrttf/oc-codex-pet-maker/blob/main/README.zh-CN.md">打开项目说明</a>

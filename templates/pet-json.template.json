@@ -1,0 +1,6 @@
+{
+  "id": "your-pet-id",
+  "displayName": "Your Pet Name",
+  "description": "A short description of this Codex pet.",
+  "spritesheetPath": "spritesheet.webp"
+}

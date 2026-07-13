@@ -41,7 +41,7 @@ git log --oneline -3
 oc-codex-pet-maker
 ```
 
-比 `codex-pet-maker` 更不容易撞名，也更明确表达用途：帮助用户把自己的 OC 做成 Codex pet。
+这个仓库名发布时更不容易撞名；公开展示名称现在使用更通用的 `Codex Pet Maker Skill`，适用于多种宠物创意和素材来源。
 
 远端地址格式：
 

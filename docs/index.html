@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OC Codex Pet Maker Skill</title>
+    <title>Codex Pet Maker Skill</title>
     <meta
       name="description"
-      content="A reusable workflow and Codex Skill for turning an OC or avatar concept into a polished Codex desktop pet."
+      content="A reusable workflow and companion toolkit for making Codex pets from ideas, references, artwork, mascots, or existing sprite assets."
     />
     <style>
       :root {
@@ -494,8 +494,8 @@
     <main class="site-shell">
       <nav class="topbar" aria-label="Primary navigation">
         <div class="brand">
-          <div class="brand-mark">OC</div>
-          <span>OC Codex Pet Maker</span>
+          <div class="brand-mark">P</div>
+          <span>Codex Pet Maker</span>
         </div>
         <div class="nav">
           <a href="#showcase">Showcase</a>
@@ -509,10 +509,11 @@
       <header class="hero">
         <div class="hero-content">
           <p class="eyebrow">Codex Skill + Sprite Toolkit</p>
-          <h1>Turn your OC into a polished Codex pet.</h1>
+          <h1>Turn any pet idea into a polished Codex pet.</h1>
           <p class="hero-copy">
-            A repeatable workflow for character planning, state design, sprite strip cleanup,
-            deterministic cutting, and final Codex pet packaging. Lanxi is the reference case.
+            Start from an animal, mascot, brand cue, artwork, avatar, reference image, text concept,
+            or existing sprites. Plan the states, inspect the intermediate work, repair weak rows,
+            and package the result. Lanxi remains the finished visual case study.
           </p>
           <div class="actions">
             <a class="button primary" href="https://github.com/otrttf/oc-codex-pet-maker#readme">Start with README</a>
@@ -537,13 +538,13 @@
           </figure>
           <figure class="gif-card">
             <div class="preview-frame">
-              <img class="showcase-shadow" src="assets/lanxi-running-right.webp" alt="Lanxi skateboard glide right animation preview" />
+              <img class="showcase-shadow" src="assets/lanxi-running-right.webp" alt="Lanxi directional movement right animation preview" />
             </div>
             <span>Running Right</span>
           </figure>
           <figure class="gif-card">
             <div class="preview-frame">
-              <img class="showcase-shadow" src="assets/lanxi-running-left.webp" alt="Lanxi skateboard glide left animation preview" />
+              <img class="showcase-shadow" src="assets/lanxi-running-left.webp" alt="Lanxi directional movement left animation preview" />
             </div>
             <span>Running Left</span>
           </figure>
@@ -598,13 +599,13 @@
             <h2 class="section-title">Make the hidden state contract visible first.</h2>
             <p class="section-note">
               The Skill starts by explaining the states, then asks the user whether each action
-              should use the default behavior or a custom OC-specific behavior.
+              should use the default behavior or a motion designed for the user's own pet.
             </p>
           </div>
           <div class="state-list" aria-label="Codex pet states">
             <div class="state-pill"><strong class="mono">0</strong><span><b>idle</b> default calm state</span></div>
-            <div class="state-pill"><strong class="mono">1</strong><span><b>running-right</b> skateboard glide right</span></div>
-            <div class="state-pill"><strong class="mono">2</strong><span><b>running-left</b> skateboard glide left</span></div>
+            <div class="state-pill"><strong class="mono">1</strong><span><b>running-right</b> directional movement right</span></div>
+            <div class="state-pill"><strong class="mono">2</strong><span><b>running-left</b> directional movement left</span></div>
             <div class="state-pill"><strong class="mono">3</strong><span><b>waving</b> greeting</span></div>
             <div class="state-pill"><strong class="mono">4</strong><span><b>jumping</b> upbeat jump</span></div>
             <div class="state-pill"><strong class="mono">5</strong><span><b>failed</b> task failed or recoverable error</span></div>
@@ -620,7 +621,7 @@
           <h2 class="section-title">A compact workflow that avoids the usual traps.</h2>
           <p class="section-note">
             The details live in the README and guides. This page shows the high-level path from
-            character idea to a verified pet package.
+            pet idea or source material to a structurally verified package.
           </p>
         </div>
         <div class="pipeline">
@@ -631,13 +632,13 @@
           </article>
           <article class="step-card">
             <div class="step-kicker">2</div>
-            <h3>Lock the character</h3>
-            <p>Create a simplified chibi reference with fixed identity details and forbidden changes.</p>
+            <h3>Lock the pet identity</h3>
+            <p>Approve one canonical reference with a stable silhouette, material, palette, markings, and attached features.</p>
           </article>
           <article class="step-card">
             <div class="step-kicker">3</div>
             <h3>Cut with code</h3>
-            <p>Use smart component detection so hair, props, and wide poses do not leak into neighboring frames.</p>
+            <p>Use smart component detection so pet features, props, and wide poses do not leak into neighboring frames.</p>
           </article>
           <article class="step-card">
             <div class="step-kicker">4</div>
@@ -650,10 +651,12 @@
       <section class="section">
         <div class="final-cta">
           <div>
-            <h2>Use Lanxi as the reference, then make your own.</h2>
+            <h2>Built from real Hatch Pet production lessons.</h2>
             <p>
-              The repository includes the Skill entrypoint, scripts, templates, bilingual guides,
-              spacing rules, and a complete Lanxi example package.
+              Hatch Pet provides a streamlined hatching workflow. This companion toolkit exposes
+              planning templates, intermediate files, spacing and cutting rules, visual diagnosis,
+              and row-level repair for identity drift, frame bleed, chroma artifacts, unsafe
+              mirroring, and motion problems. It complements rather than replaces Hatch Pet.
             </p>
           </div>
           <a class="button primary" href="https://github.com/otrttf/oc-codex-pet-maker#readme">Open the project</a>

@@ -1,11 +1,13 @@
 ---
 name: oc-codex-pet-maker
-description: Use this skill to help a user create a custom Codex desktop pet from an OC/avatar concept, including state action planning, sprite-strip generation guidance, deterministic cutting, spacing QA, spritesheet packaging, and local installation.
+description: Use this skill to create, repair, QA, or package a Codex desktop pet from an animal idea, mascot, brand or product cue, existing artwork, avatar, reference image, text concept, or existing sprite assets.
 ---
 
-# OC Codex Pet Maker
+# Codex Pet Maker
 
 Use this skill when the user wants to create, repair, QA, or package a custom Codex desktop pet.
+
+This skill is self-contained when installed from this repository's `skill/` folder. Resolve referenced `templates/`, `docs/`, and `scripts/` paths relative to this `SKILL.md` first.
 
 ## Required First Step: State Action Planning
 
@@ -35,15 +37,15 @@ Do not proceed to image generation until the user approves the default state act
 
 ## Workflow
 
-1. Create or confirm the pet identity and character spec.
+1. Identify the starting point: text concept, reference images, non-character subject, or existing sprite assets that need repair.
 2. Explain and approve the state action plan.
-3. Generate a canonical character reference.
-4. Generate state references.
-5. Generate chroma-key horizontal sprite strips.
+3. Generate or import a canonical pet reference and confirm its silhouette, surface/material, palette, markings, attached features, and proportions.
+4. Generate state references with the prompt template.
+5. Generate chroma-key horizontal sprite strips with the prompt template and spacing rules.
 6. Cut strips into `192x208` transparent cells with the bundled cutter.
 7. QA cell previews, animated GIFs, spacing metrics, and edge cleanup.
 8. Compose a `1536x1872` spritesheet for 8 columns x 9 rows.
-9. Create `pet.json` and install to the Codex pet directory only with user approval.
+9. Create `pet.json` from the template and install to the Codex pet directory only with user approval.
 
 ## Sprite Strip Rules
 
@@ -54,6 +56,13 @@ docs/SPRITE_STRIP_SPACING_RULES.md
 ```
 
 Key rule: source strips are intermediate images. They need wide pure-chroma gutters between frame components. The final packed spritesheet is created later by code.
+
+Useful templates:
+
+```text
+templates/state-reference-prompt.template.md
+templates/sprite-strip-prompt.template.md
+```
 
 ## Cutter
 
@@ -82,7 +91,13 @@ If `spacing_summary.warnings` exists, inspect the preview carefully. Use strict 
 
 ## Compose And Validate
 
-After all 9 row strips are approved, create a manifest like:
+After all 9 row strips are approved, create a manifest from:
+
+```text
+templates/rows-manifest.template.json
+```
+
+It should look like:
 
 ```json
 {
@@ -109,15 +124,28 @@ python3 scripts/compose_spritesheet.py \
   --webp-out <package-dir>/spritesheet.webp
 ```
 
-Create `<package-dir>/pet.json`, then validate:
+Create `<package-dir>/pet.json` from:
+
+```text
+templates/pet-json.template.json
+```
+
+Keep `spritesheetPath` pointing to the generated `spritesheet.webp`, then validate:
 
 ```bash
 python3 scripts/validate_pet_package.py --package-dir <package-dir>
 ```
 
+For pet package installation guidance, read:
+
+```text
+docs/INSTALLATION.md
+```
+
 ## Important Distinctions
 
 - `running` means task processing, not literal movement.
-- `running-right` and `running-left` are directional movement states. They do not have to be literal running; a skateboard glide, hover, tiny dance step, or other compact directional action may be better for complex characters.
+- `running-right` and `running-left` are directional movement states. They do not have to be literal running; use any compact directional motion appropriate to the pet's anatomy or form.
 - `waiting`, `running`, and `review` should have distinct actions.
 - Avoid detached effects, shadows, glows, text, labels, UI, and symbols unless intentionally part of the pet and cleanly cuttable.
+- Do not assume the pet is humanoid. Describe silhouette, material, markings, attached features, motion, and expression in ways that also work for animals, slimes, robots, plants, objects, and abstract icons.

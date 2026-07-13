@@ -1,0 +1,40 @@
+{
+  "rows": [
+    {
+      "state": "idle",
+      "strip": "rows/idle.png"
+    },
+    {
+      "state": "running-right",
+      "strip": "rows/running-right.png"
+    },
+    {
+      "state": "running-left",
+      "strip": "rows/running-left.png"
+    },
+    {
+      "state": "waving",
+      "strip": "rows/waving.png"
+    },
+    {
+      "state": "jumping",
+      "strip": "rows/jumping.png"
+    },
+    {
+      "state": "failed",
+      "strip": "rows/failed.png"
+    },
+    {
+      "state": "waiting",
+      "strip": "rows/waiting.png"
+    },
+    {
+      "state": "running",
+      "strip": "rows/running.png"
+    },
+    {
+      "state": "review",
+      "strip": "rows/review.png"
+    }
+  ]
+}
