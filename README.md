@@ -1,4 +1,4 @@
-# Codex Pet Maker Skill
+# OC Codex Pet Maker Skill
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -40,24 +40,42 @@ cp -R skill/* ~/.codex/skills/oc-codex-pet-maker/
 
 The installed skill includes the entrypoint, required templates, sprite-strip rules, and Python scripts. This means a new Codex conversation can resolve the paths referenced by the Skill without depending on the original repository checkout.
 
-Then start a new Codex conversation and say something like:
+After installation, start a new Codex conversation and say only:
 
 ```text
-Use the Codex Pet Maker skill to help me create a Codex pet.
-Pet idea or source: …
-Visual style or material: …
-Signature traits to preserve: …
+Use the OC Codex Pet Maker skill to help me create a Codex pet, and guide me one step at a time.
 ```
 
-The Skill should first explain the 9 Codex pet states and help you create a state action plan before generating images.
+You do not need a reference image or a complete prompt. The Skill should first explain that you can start from text, a reference image, or existing sprite assets, then ask only for the information needed at the current step.
+
+Only two items are required to begin:
+
+- starting route: text, reference image, or existing sprite assets;
+- pet concept: a short description of what you want to make.
+
+The pet name, visual style, palette, signature traits, and action preferences are optional at first. The Skill should offer defaults or let you skip them. Source files become required only when you choose the reference-image or existing-sprite route.
+
+As an optional shortcut, you can provide a fuller brief:
+
+```text
+Use the OC Codex Pet Maker skill to help me create a Codex pet.
+Pet concept (required): …
+Starting material (required): text / I will upload references / I have sprite assets
+Pet name (optional): …
+Visual style or material (optional): …
+Traits to preserve (optional; recommended with references): …
+Action preferences (optional): …
+Guide me one step at a time. Explain the 9 states and propose an action plan, then wait for my approval before generating images.
+```
 
 Expected first-run flow:
 
-1. Read the Skill entrypoint.
-2. Explain the 9 Codex pet states.
-3. Fill or customize the state action plan.
-4. Wait for your approval before image generation.
-5. Generate state strips, cut them, QA previews, compose the spritesheet, and validate the package.
+1. Choose text, reference images, or existing sprite assets as the starting route.
+2. Give a short pet concept; skip or defer optional details if desired.
+3. Review and customize the 9-state action plan.
+4. Approve the canonical reference before state image generation.
+5. At every phase, receive a result, an explicit next step, and a concrete approval request.
+6. Generate or import strips, cut them, QA previews, repair failed rows, compose the spritesheet, and validate the package.
 
 ### 2. Create A State Action Plan
 
@@ -141,7 +159,7 @@ One of the biggest lessons from building a real pet was that generated horizonta
 
 ## How This Relates To Hatch Pet
 
-This project grew from practical experience using the Codex Hatch Pet Skill. Hatch Pet provides a streamlined, agent-orchestrated path from an idea or references to a packaged pet. Codex Pet Maker is a companion toolkit for users who want to inspect, customize, learn from, or repair the intermediate process.
+This project grew from practical experience using the Codex Hatch Pet Skill. Hatch Pet provides a streamlined, agent-orchestrated path from an idea or references to a packaged pet. OC Codex Pet Maker is a companion toolkit for users who want to inspect, customize, learn from, or repair the intermediate process. The name reflects its origin in OC creation, while the workflow also supports animals, mascots, objects, and other pet concepts.
 
 It focuses on problems that can appear during a real Hatch Pet workflow:
 

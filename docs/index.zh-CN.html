@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Codex Pet Maker Skill | 中文</title>
+    <title>OC Codex Pet Maker Skill | 中文</title>
     <meta
       name="description"
       content="一套可复用的 Codex Skill 配套工作流，用来把创意、参考图、已有作品、吉祥物或 sprite 素材制作成 Codex 桌面宠物。"
@@ -511,8 +511,8 @@
     <main class="site-shell">
       <nav class="topbar" aria-label="Primary navigation">
         <div class="brand">
-          <div class="brand-mark">P</div>
-          <span>Codex Pet Maker</span>
+          <div class="brand-mark">OC</div>
+          <span>OC Codex Pet Maker</span>
         </div>
         <div class="nav">
           <a href="#showcase">效果展示</a>
@@ -619,8 +619,8 @@
           </div>
           <div class="state-list" aria-label="Codex pet states">
             <div class="state-pill"><strong class="mono">0</strong><span><b>idle</b> 默认待机状态</span></div>
-            <div class="state-pill"><strong class="mono">1</strong><span><b>running-right</b> 向右移动</span></div>
-            <div class="state-pill"><strong class="mono">2</strong><span><b>running-left</b> 向左移动</span></div>
+            <div class="state-pill"><strong class="mono">1</strong><span><b>running-right</b> 向右拖拽或移动</span></div>
+            <div class="state-pill"><strong class="mono">2</strong><span><b>running-left</b> 向左拖拽或移动</span></div>
             <div class="state-pill"><strong class="mono">3</strong><span><b>waving</b> 打招呼</span></div>
             <div class="state-pill"><strong class="mono">4</strong><span><b>jumping</b> 跳跃或开心反馈</span></div>
             <div class="state-pill"><strong class="mono">5</strong><span><b>failed</b> 任务失败或可恢复错误</span></div>
@@ -633,31 +633,31 @@
 
       <section class="section" id="workflow">
         <div class="section-header">
-          <h2 class="section-title">一套包含了避坑经验的流程。</h2>
+          <h2 class="section-title">不用先学流程，Skill 会一步一步带你做。</h2>
           <p class="section-note">
-            具体细节放在 README 和指南里。这个页面只展示从宠物想法或素材到结构验证通过的宠物包的核心路径。
+            开始只需要选择纯文字、参考图或现有 sprite，再用一句话描述宠物。名称、风格和动作偏好都可以稍后填写或使用建议值。
           </p>
         </div>
         <div class="pipeline">
           <article class="step-card">
             <div class="step-kicker">1</div>
-            <h3>规划状态</h3>
-            <p>先说明 9 个状态，再确认哪些动作使用默认方案，哪些需要自定义。</p>
+            <h3>选择素材起点</h3>
+            <p>先问你从纯文字、参考图还是现有 sprite 开始，不会默认要求上传参考图。</p>
           </article>
           <article class="step-card">
             <div class="step-kicker">2</div>
-            <h3>锁定宠物身份</h3>
-            <p>确认一张标准参考图，固定轮廓、材质、配色、标记和附着特征。</p>
+            <h3>确认状态与身份</h3>
+            <p>逐步确认 9 个状态动作和一张标准参考图，每一步都说明必填、选填与下一步。</p>
           </article>
           <article class="step-card">
             <div class="step-kicker">3</div>
-            <h3>用代码切图</h3>
-            <p>用组件识别来切分动画横条，避免宠物特征、道具和大动作串到相邻帧。</p>
+            <h3>生成、切图、检查</h3>
+            <p>查看每行动画的预览、GIF 和检查结果；某一行失败时只修复这一行。</p>
           </article>
           <article class="step-card">
             <div class="step-kicker">4</div>
-            <h3>打包验证</h3>
-            <p>合成 1536 x 1872 图集，创建 pet.json，并验证最终宠物包。</p>
+            <h3>打包并继续引导</h3>
+            <p>合成并验证宠物包，同时区分结构验证、视觉检查和 Codex Desktop 启用状态。</p>
           </article>
         </div>
       </section>

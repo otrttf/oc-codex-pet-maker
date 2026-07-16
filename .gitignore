@@ -33,3 +33,4 @@ env/
 40-draft-package/previews/
 40-draft-package/spritesheet.png
 docs/assets/*-local.png
+.superpowers/
